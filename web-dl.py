@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-import modules.args as args
-import modules.assets as assets
-import modules.downloader as downloader
-import modules.decryptor as decryptor
+import TGHRip.modules.args as args
+import TGHRip.modules.assets as assets
+import TGHRip.modules.downloader as downloader
+import TGHRip.modules.decryptor as decryptor
 
 
 # === Ctrl+C === #
