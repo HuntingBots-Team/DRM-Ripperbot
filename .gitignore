@@ -4,3 +4,10 @@ downloads/
 tghrip_userbot.session
 __pycache__/
 *.pyc" > .gitignore
+
+
+*venv*/
+__pycache__/
+cache/
+*.mkv
+*.mp4
