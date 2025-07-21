@@ -1,4 +1,6 @@
 import logging
+import os
+import subprocess
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
 from configparser import ConfigParser
@@ -43,10 +45,43 @@ async def rip(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     url, key = context.args[0], context.args[1]
-    context.user_data['url'] = url
-    context.user_data['key'] = key
+    filename = "output.mp4"
+    savepath = config.get("DOWNLOAD", "SavePath", fallback="downloads/")
+    output_file = os.path.join(savepath, filename)
 
-    await send_task_options(update, context)
+    # DASH (.mpd) links - use web-dl for DRM/non-DRM
+    if url.endswith(".mpd"):
+        cmd = [
+            "python", "webdl.py",
+            "--mpd", url,
+            "--key", key,
+            "--out", output_file
+        ]
+    # HLS (.m3u8) links - use ffmpeg for non-DRM
+    elif url.endswith(".m3u8"):
+        cmd = [
+            "ffmpeg",
+            "-y",
+            "-i", url,
+            "-c", "copy",
+            output_file
+        ]
+    else:
+        await update.message.reply_text("Unsupported link type. Only .mpd and .m3u8 are supported.")
+        return
+
+    await update.message.reply_text(f"Processing your stream. This may take a while...")
+
+    try:
+        subprocess.run(cmd, check=True)
+        if os.path.exists(output_file):
+            with open(output_file, "rb") as f:
+                await update.message.reply_document(f)
+            os.remove(output_file)
+        else:
+            await update.message.reply_text("Ripping failed: output file not found.")
+    except Exception as e:
+        await update.message.reply_text(f"Error while ripping: {str(e)}")
 
 if __name__ == '__main__':
     app = ApplicationBuilder().token(TOKEN).build()
