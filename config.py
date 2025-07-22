@@ -1,7 +1,7 @@
 import os
 import logging
 
-# Corrected file paths with quotes
+# Module-level variables
 Credentials = 'auth/client_secrets.json'
 TokenFile = 'auth/token.json'
 
@@ -34,9 +34,8 @@ class Config(object):
     DEF_WATER_MARK_FILE = "@UploaderXNTBot"
     MAX_MESSAGE_LENGTH = 4096
     PROCESS_MAX_TIMEOUT = 3600
-    # Duplicate DEF_WATER_MARK_FILE removed; kept only one
 
-    # Properly handle optional environment variables for integers
+    # Handle optional environment variables
     try:
         SUDO_USERS = [int(x) for x in os.environ.get("SUDO_USERS", "").split(',') if x]
     except ValueError:
@@ -44,7 +43,7 @@ class Config(object):
 
     try:
         DRIVE_ID = int(os.environ.get("DRIVE_ID", ""))
-    except ValueError:
+    except (ValueError, TypeError):
         DRIVE_ID = None
 
     SESSION_NAME = os.environ.get(
