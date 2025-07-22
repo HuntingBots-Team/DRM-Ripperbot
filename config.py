@@ -47,9 +47,9 @@ class Config(object):
     
     DEF_WATER_MARK_FILE = "CloudPlus_URLUploader_bot"
     
-    Sudo_Users = int(os.environ.get("Sudo_Users", ""))  
+    SUDO_USERS = int(os.environ.get("SUDO_USERS", ""))  
 
-    Drive_ID = int(os.environ.get("Drive_ID", "1606221784"))
+    DRIVE_ID = int(os.environ.get("DRIVE_ID", ""))
     
     SESSION_NAME = os.environ.get("SESSION_NAME", "AQA7eRMAdI8XLjuonz9nStZmtY1wJ05gCXoTGRTSe-S1pBCKayYbB8CtTZT1fhm9z0I0VU_YzFCJQbsUXUEudIA8MIwDFIUM9u68EP56oB7pvCLj1EV-4W9vKJR55ufa_qp4KqnCniV2mQ1vS98X9iwqe37j7IZ0F4K8fV2J8B-8VagJKKT_fOWyViJptWa3GFyem7X6qGXJ3KHdKCk_2RlMt48IEDwfRXeF8F1g5moxnsAlugP8SUvq7t7mVF5FcUFvWIqmGCBbPnsMKm-cCfyX6iNKPbtkpc23gmSKk8f0sLsT-y1zXQKKYMD0kElWxff3PaRnkLIQNL8QgdRNaJ32bch3yAAAAABNeVDBAA")
     
