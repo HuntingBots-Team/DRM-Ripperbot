@@ -5,7 +5,8 @@ from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
 from TGHRip.modules.pmtext import Translation 
 from config import Config
-from TGHRip.utils.userdb import AddUser, add_user_to_database  # Import your function
+# Removed add_user_to_database import
+from TGHRip.utils.userdb import AddUser  # Keep other functions if needed
 from TGHRip.utils.mongodb import db
 
 @Client.on_message(filters.command(["start"]) & filters.private)
@@ -14,8 +15,7 @@ async def start(bot, message):
     if not message.from_user:
         return await message.reply_text("I don't know about you sar :(")
     
-    # Call to your function to add user data to database
-    await add_user_to_database(bot, message)
+    # Removed call to add_user_to_database
     
     # Send a message to LOG_CHANNEL
     await bot.send_message(
