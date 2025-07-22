@@ -5,6 +5,8 @@ from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
 from TGHRip.modules.pmtext import Translation 
 from config import Config
+from TGHRip.utils.userdb import AddUser 
+
 # or if you prefer class variables:
 # from config import Config
 
