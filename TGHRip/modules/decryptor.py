@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ET
 from pprint import pprint
 from pwn import *
 from itertools import tee
-import modules.assets as assets
+import TGHRip.modules.assets as assets
 import os
 
 
