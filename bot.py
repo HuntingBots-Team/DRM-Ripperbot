@@ -52,7 +52,7 @@ async def rip(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # DASH (.mpd) links - use web-dl for DRM/non-DRM
     if url.endswith(".mpd"):
         cmd = [
-            "python", "webdl.py",
+            "python3", "webdl.py",
             "--mpd", url,
             "--key", key,
             "--out", output_file
