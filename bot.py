@@ -3,6 +3,7 @@ import os
 import subprocess
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
+from pyrogram import Client
 from TGHRip.inline_keyboard import send_task_options, handle_callback
 from TGHRip.access_control import is_authorized
 from config import Config
@@ -82,10 +83,31 @@ async def rip(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"Error while ripping: {str(e)}")
 
 if __name__ == '__main__':
-    app = ApplicationBuilder().token(TOKEN).build()
+    # Ensure download directory exists
+    if not os.path.isdir(Config.DOWNLOAD_LOCATION):
+        os.makedirs(Config.DOWNLOAD_LOCATION)
 
+    # Start python-telegram-bot bot
+    app = ApplicationBuilder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("rip", rip))
     app.add_handler(CallbackQueryHandler(handle_callback))
 
-    app.run_polling()
+    # Start Pyrogram client with TGHRip as plugins root
+    plugins = dict(root="TGHRip")
+    pyro_client = Client(
+        "@urltofile00bot",
+        bot_token=Config.BOT_TOKEN,
+        api_id=Config.API_ID,
+        api_hash=Config.API_HASH,
+        upload_boost=True,
+        sleep_threshold=300,
+        plugins=plugins
+    )
+
+    print("🎊 I AM ALIVE 🎊  • Support @TGHLeechSupport")
+
+    import threading
+    telegram_thread = threading.Thread(target=app.run_polling)
+    telegram_thread.start()
+    pyro_client.run()
