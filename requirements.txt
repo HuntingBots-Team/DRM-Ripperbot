@@ -6,7 +6,8 @@ google-auth-httplib2==0.2.0
 ffmpeg-python==0.2.0
 pyrogram==2.0.106
 tgcrypto==1.2.5
-argparse
+argparse 
+cachetools==6.1.0
 validators
 pwntools
 xmltodict==0.12.0
