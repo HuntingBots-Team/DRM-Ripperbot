@@ -1,14 +1,12 @@
 import asyncio
 from pyrogram import Client
-from configparser import ConfigParser
+from config import Config
 
-config = ConfigParser()
-config.read("config.ini")
+API_ID = Config.API_ID
+API_HASH = Config.API_HASH
+SESSION_NAME = Config.SESSION_NAME if hasattr(Config, "SESSION_NAME") else "tghrip_userbot"
 
-API_ID = config.getint("API", "ApiID")
-API_HASH = config.get("API", "ApiHash")
-
-app = Client("tghrip_userbot", api_id=API_ID, api_hash=API_HASH)
+app = Client(SESSION_NAME, api_id=API_ID, api_hash=API_HASH)
 
 async def upload_file(file_path, target_chat_id):
     async with app:
