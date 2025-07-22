@@ -11,7 +11,7 @@ logging.basicConfig(
 
 class Config(object):
     
-    BOT_TOKEN = os.environ.get("BOT_TOKEN", "1839386089:AAH73y3bTe0cbDLOLV7lszUYwMiHFdzEv5A")
+    BOT_TOKEN = os.environ.get("BOT_TOKEN", "1719450568:AAFs2Rtl1vroH0IBL91QFQuuBc5DYiX-M48l")
     
     API_ID = int(os.environ.get("API_ID", "3975570"))
     
@@ -58,5 +58,5 @@ class Config(object):
     
     TG_MIN_FILE_SIZE = 2097152000
     
-    BOT_USERNAME = os.environ.get("BOT_USERNAME", "@CloudPlus_URLUploader_bot")
+    BOT_USERNAME = os.environ.get("BOT_USERNAME", "@urltofile00bot")
                                   
