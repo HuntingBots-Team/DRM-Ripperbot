@@ -10,9 +10,9 @@ class Config(object):
         "SESSION_NAME",
         "AQA7eRMAdI8XLjuonz9nStZmtY1wJ05gCXoTGRTSe-S1pBCKayYbB8CtTZT1fhm9z0I0VU_YzFCJQbsUXUEudIA8MIwDFIUM9u68EP56oB7pvCLj1EV-4W9vKJR55ufa_qp4KqnCniV2mQ1vS98X9iwqe37j7IZ0F4K8fV2J8B-8VagJKKT_fOWyViJptWa3GFyem7X6qGXJ3KHdKCk_2RlMt48IEDwfRXeF8F1g5moxnsAlugP8SUvq7t7mVF5FcUFvWIqmGCBbPnsMKm-cCfyX6iNKPbtkpc23gmSKk8f0sLsT-y1zXQKKYMD0kElWxff3PaRnkLIQNL8QgdRNaJ32bch3yAAAAABNeVDBAA"
     )
-    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002676062227"))
+    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002773421244"))
     OWNER_ID = int(os.environ.get("OWNER_ID", 1606221784))
-    UPDATES_CHANNEL = os.environ.get("UPDATES_CHANNEL", "-1002676062227")
+    UPDATES_CHANNEL = os.environ.get("UPDATES_CHANNEL", "-1002773421244")
     BOT_USERNAME = os.environ.get("BOT_USERNAME", "@urltofile00bot")
 
     # Google Drive credentials
@@ -30,7 +30,7 @@ class Config(object):
     CHUNK_SIZE = int(os.environ.get("CHUNK_SIZE", 128))
     DEF_THUMB_NAIL_VID_S = os.environ.get("DEF_THUMB_NAIL_VID_S", "")
     HTTP_PROXY = os.environ.get("HTTP_PROXY", "")
-    DEF_WATER_MARK_FILE = "@UploaderXNTBot"
+    DEF_WATER_MARK_FILE = "@urltofile00bot"
     MAX_MESSAGE_LENGTH = 4096
     PROCESS_MAX_TIMEOUT = 3600
 
