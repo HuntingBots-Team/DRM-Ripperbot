@@ -2,7 +2,7 @@ from pyrogram import Client
 from TGHRip.utils.mongodb import db
 from pyrogram.types import Message
 
-async def add_user(bot: Client, message: Message):
+async def AddUser(bot: Client, message: Message):
     user_id = message.from_user.id
     first_name = message.from_user.first_name
     username = message.from_user.username
