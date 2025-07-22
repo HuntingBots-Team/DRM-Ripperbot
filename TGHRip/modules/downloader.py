@@ -9,7 +9,7 @@ import os
 import sys
 import time
 import glob
-import modules.assets as assets
+import TGHRip.modules.assets as assets
 from pwn import *
 
 
