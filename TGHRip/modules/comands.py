@@ -6,6 +6,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
 from TGHRip.modules.pmtext import Translation 
 from config import Config
 from TGHRip.utils.userdb import AddUser 
+from TGHRip.utils.mongodb import db
 
 # or if you prefer class variables:
 # from config import Config
