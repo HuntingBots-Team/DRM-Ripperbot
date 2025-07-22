@@ -4,7 +4,7 @@ from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
 from TGHRip.modules.pmtext import Translation 
-from TGHRip.config_manager import config
+from config import config
 from pyrogram import Client, filters 
 
 
