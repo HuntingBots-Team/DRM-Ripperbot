@@ -1,37 +1,43 @@
 import os
-import mimetypes
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
-from config import Config
 
-# Define the scope for Google Drive API
+# Path to your service account JSON key file
+SERVICE_ACCOUNT_FILE = 'path/to/your/service_account.json'
+
+# Define your required scopes
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
 
-# Load service account credentials and create drive service
-SERVICE_ACCOUNT_FILE = Config.Credentials
-FOLDER_ID = Config.DRIVE_ID
+def initialize_gdrive():
+    # Check if the credentials file exists
+    if not os.path.exists(SERVICE_ACCOUNT_FILE):
+        raise FileNotFoundError(f"Service account file not found at {SERVICE_ACCOUNT_FILE}")
 
-creds = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-drive_service = build('drive', 'v3', credentials=creds)
+    # Load credentials from the JSON key file
+    creds = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
-def upload_file(file_path: str, filename: str = None) -> str:
-    if not filename:
-        filename = os.path.basename(file_path)
+    # Build the Drive API client
+    drive_service = build('drive', 'v3', credentials=creds)
+    return drive_service
 
-    file_metadata = {
-        'name': filename,
-        'parents': [FOLDER_ID]
-    }
+def upload_file(file_path, filename):
+    drive_service = initialize_gdrive()
 
-    mime_type, _ = mimetypes.guess_type(file_path)
+    file_metadata = {'name': filename}
+    media = MediaFileUpload(file_path, resumable=True)
 
-    from googleapiclient.http import MediaFileUpload
-    media = MediaFileUpload(file_path, mimetype=mime_type, resumable=True)
-
-    uploaded_file = drive_service.files().create(
+    # Upload the file
+    file = drive_service.files().create(
         body=file_metadata,
         media_body=media,
-        fields='id, webViewLink'
+        fields='id'
     ).execute()
 
-    return uploaded_file.get("webViewLink")
+    print(f"File ID: {file.get('id')} uploaded successfully.")
+
+if __name__ == '__main__':
+    # Example usage
+    file_path = 'path/to/file/to/upload.ext'
+    filename = 'uploaded_filename.ext'
+
+    upload_file(file_path, filename)
