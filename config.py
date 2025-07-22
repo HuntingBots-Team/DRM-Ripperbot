@@ -23,7 +23,8 @@ class Config(object):
     DOWNLOAD_LOCATION = "./DOWNLOADS"
     MAX_FILE_SIZE = 2097152000
     TG_MAX_FILE_SIZE = 2097152000
-    SESSION_STR = ""
+    SESSION_STR = "" 
+    DATABASE_URL = os.environ.get("DATABASE_URL", "mongodb+srv://hunter123:hunter123@cluster0.iueac.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
     FREE_USER_MAX_FILE_SIZE = 2097152000
     MAX_SPLIT_SIZE = 4187407334
     CHUNK_SIZE = int(os.environ.get("CHUNK_SIZE", 128))
