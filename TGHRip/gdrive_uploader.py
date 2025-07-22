@@ -4,7 +4,10 @@ from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from config import Config
 
+# Define the scope for Google Drive API
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
+
+# Load service account credentials and create drive service
 SERVICE_ACCOUNT_FILE = Config.Credentials
 FOLDER_ID = Config.DRIVE_ID
 
