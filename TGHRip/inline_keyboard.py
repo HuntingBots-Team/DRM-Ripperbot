@@ -1,6 +1,6 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import ContextTypes
-from task_manager import get_task, reset_task
+from TGHRip.task_manager import get_task, reset_task
 
 async def send_task_options(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
