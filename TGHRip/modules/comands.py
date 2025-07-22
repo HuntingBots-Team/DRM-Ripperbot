@@ -5,11 +5,8 @@ from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
 from TGHRip.modules.pmtext import Translation 
 from config import Config
-from TGHRip.utils.userdb import AddUser 
+from TGHRip.utils.userdb import AddUser, add_user_to_database  # Import your function
 from TGHRip.utils.mongodb import db
-
-# or if you prefer class variables:
-# from config import Config
 
 @Client.on_message(filters.command(["start"]) & filters.private)
 async def start(bot, message):
