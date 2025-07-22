@@ -1,5 +1,5 @@
 from pyrogram import Client
-from utils.mongodb import db
+from TGHRip.utils.mongodb import db
 from pyrogram.types import Message
 
 
