@@ -69,3 +69,4 @@ class Database:
         user = await self.col.find_one({'id': int(id)})
         return user or None
 
+db = Database(Config.DATABASE_URL, "@urltofile00bot")
