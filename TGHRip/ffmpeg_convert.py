@@ -1,8 +1,13 @@
 import os
 import subprocess
 import uuid
+from config import Config
 
-def rip_stream(url: str, key: str, out_format: str = "mp4", save_dir="downloads") -> str:
+def rip_stream(url: str, key: str, out_format: str = "mp4", save_dir=None) -> str:
+    # Use download location from config if not provided
+    if save_dir is None:
+        save_dir = Config.DOWNLOAD_LOCATION
+
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
 
