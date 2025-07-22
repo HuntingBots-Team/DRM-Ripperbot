@@ -3,6 +3,7 @@ import os
 import subprocess
 import threading
 import asyncio
+
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
 from pyrogram import Client
@@ -10,13 +11,14 @@ from TGHRip.inline_keyboard import send_task_options, handle_callback
 from TGHRip.access_control import is_authorized
 from config import Config
 
-# Read config values from environment using Config class
+# Read config values
 TOKEN = Config.BOT_TOKEN
 OWNER_ID = Config.OWNER_ID
 AUTHORIZED_GROUP = Config.LOG_CHANNEL
 
 logging.basicConfig(level=logging.INFO)
 
+# Telegram command handlers
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     chat_id = update.effective_chat.id
@@ -50,7 +52,7 @@ async def rip(update: Update, context: ContextTypes.DEFAULT_TYPE):
     savepath = Config.DOWNLOAD_LOCATION
     output_file = os.path.join(savepath, filename)
 
-    # DASH (.mpd) links - use web-dl for DRM/non-DRM
+    # Determine command based on link type
     if url.endswith(".mpd"):
         cmd = [
             "python3", "webdl.py",
@@ -58,7 +60,6 @@ async def rip(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "--key", key,
             "--out", output_file
         ]
-    # HLS (.m3u8) links - use ffmpeg for non-DRM
     elif url.endswith(".m3u8"):
         cmd = [
             "ffmpeg",
@@ -71,7 +72,7 @@ async def rip(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Unsupported link type. Only .mpd and .m3u8 are supported.")
         return
 
-    await update.message.reply_text(f"Processing your stream. This may take a while...")
+    await update.message.reply_text("Processing your stream. This may take a while...")
 
     try:
         subprocess.run(cmd, check=True)
@@ -84,27 +85,20 @@ async def rip(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         await update.message.reply_text(f"Error while ripping: {str(e)}")
 
-def start_telegram_bot():
-    # Create application instance
+async def main():
+    # Initialize Telegram application
     application = ApplicationBuilder().token(TOKEN).build()
+
+    # Add command handlers
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("rip", rip))
     application.add_handler(CallbackQueryHandler(handle_callback))
-    # Run polling in asyncio event loop
-    asyncio.run(application.run_polling())
 
-if __name__ == '__main__':
-    # Ensure download directory exists
-    if not os.path.isdir(Config.DOWNLOAD_LOCATION):
-        os.makedirs(Config.DOWNLOAD_LOCATION)
+    # Start the bot (this is a blocking call)
+    await application.run_polling()
 
-    print("🎊 I AM ALIVE 🎊  • Support @TGHLeechSupport")
-    
-    # Start the python-telegram-bot in a thread with asyncio
-    telegram_thread = threading.Thread(target=start_telegram_bot)
-    telegram_thread.start()
-
-    # Start Pyrogram client
+def run_pyrogram():
+    # Initialize and run Pyrogram client in background thread
     pyro_client = Client(
         "@urltofile00bot",
         bot_token=Config.BOT_TOKEN,
@@ -114,3 +108,17 @@ if __name__ == '__main__':
         plugins=dict(root="TGHRip")
     )
     pyro_client.run()
+
+if __name__ == '__main__':
+    # Ensure download directory exists
+    if not os.path.isdir(Config.DOWNLOAD_LOCATION):
+        os.makedirs(Config.DOWNLOAD_LOCATION)
+
+    print("🎊 I AM ALIVE 🎊  • Support @TGHLeechSupport")
+
+    # Run Pyrogram in a background thread
+    pyro_thread = threading.Thread(target=run_pyrogram, daemon=True)
+    pyro_thread.start()
+
+    # Run the Telegram bot in the main event loop
+    asyncio.run(main())
