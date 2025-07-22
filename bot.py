@@ -1,6 +1,8 @@
 import logging
 import os
 import subprocess
+import threading
+import asyncio
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
 from pyrogram import Client
@@ -82,32 +84,33 @@ async def rip(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         await update.message.reply_text(f"Error while ripping: {str(e)}")
 
+def start_telegram_bot():
+    # Create application instance
+    application = ApplicationBuilder().token(TOKEN).build()
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("rip", rip))
+    application.add_handler(CallbackQueryHandler(handle_callback))
+    # Run polling in asyncio event loop
+    asyncio.run(application.run_polling())
+
 if __name__ == '__main__':
     # Ensure download directory exists
     if not os.path.isdir(Config.DOWNLOAD_LOCATION):
         os.makedirs(Config.DOWNLOAD_LOCATION)
 
-    # Start python-telegram-bot bot
-    app = ApplicationBuilder().token(TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("rip", rip))
-    app.add_handler(CallbackQueryHandler(handle_callback))
+    print("🎊 I AM ALIVE 🎊  • Support @TGHLeechSupport")
+    
+    # Start the python-telegram-bot in a thread with asyncio
+    telegram_thread = threading.Thread(target=start_telegram_bot)
+    telegram_thread.start()
 
-    # Start Pyrogram client with TGHRip as plugins root
-    plugins = dict(root="TGHRip")
+    # Start Pyrogram client
     pyro_client = Client(
         "@urltofile00bot",
         bot_token=Config.BOT_TOKEN,
         api_id=Config.API_ID,
         api_hash=Config.API_HASH,
         sleep_threshold=300,
-        plugins=plugins
-        # Removed 'upload_boost=True' because it's unsupported
+        plugins=dict(root="TGHRip")
     )
-
-    print("🎊 I AM ALIVE 🎊  • Support @TGHLeechSupport")
-
-    import threading
-    telegram_thread = threading.Thread(target=app.run_polling)
-    telegram_thread.start()
     pyro_client.run()
