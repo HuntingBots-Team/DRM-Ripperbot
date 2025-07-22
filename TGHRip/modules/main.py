@@ -3,37 +3,31 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 class Translation(object):
 
     START_TEXT = """
-👋 Hᴇʏ {} 
+WELCOME_MESSAGE = (
+    "👋 Welcome to TGHRip!\n\n"
+    "🔧 Owner: @The_Ghost_Hunter\n"
+    "📣 Updates: https://t.me/allhindi_stories\n"
+    "💬 Support: https://t.me/TGHLeechSupport2\n\n"
+    "This bot allows you to rip DRM and non-DRM protected live streams.\n"
+    "Type /help for available commands."
+)
 
-ⵊ Aᴍ Tᴇʟᴇɢʀᴀᴍ URL Uᴘʟᴏᴀᴅᴇʀ Bᴏᴛ.
+HELP_MESSAGE = (
+    "📖 TGHRip Help\n\n"
+    "Commands:\n"
+    "/start - Welcome message\n"
+    "/help - Show this help message\n"
+    "/rip <url> <key> - Rip DRM or non-DRM protected live streams\n\n"
+    "Usage:\n"
+    "Send /rip followed by the stream URL and key (if required).\n"
+    "Example:\n"
+    "/rip https://example.com/stream.mpd abcd1234:key5678\n\n"
+    "Supported formats:\n"
+    "- DASH (.mpd, DRM or non-DRM)\n"
+    "- HLS (.m3u8, non-DRM)\n"
+    "\nNote: Ripping DRM-protected content may require a valid key. Only use this bot for authorized content."
+)
 
-**Sᴇɴᴅ ᴍᴇ ᴀ ᴅɪʀᴇᴄᴛ ʟɪɴᴋ ᴀɴᴅ ɪ ᴡɪʟʟ ᴜᴘʟᴏᴀᴅ ɪᴛ ᴛᴏ ᴛᴇʟᴇɢʀᴀᴍ ᴀs ᴀ ꜰɪʟᴇ/ᴠɪᴅᴇᴏ**
-
-Usᴇ ʜᴇʟᴘ ʙᴜᴛᴛᴏɴ ᴛᴏ ᴋɴᴏᴡ ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ
-
-"""
-    HELP_TEXT = """
-ʟɪɴᴋ ᴛᴏ ᴍᴇᴅɪᴀ ᴏʀ ꜰɪʟᴇ
-
-➠ sᴇɴᴅ ᴀ ʟɪɴᴋ ꜰᴏʀ ᴜᴘʟᴏᴀᴅ ᴛᴏ ᴛᴇʟᴇɢʀᴀᴍ ꜰɪʟᴇ ᴏʀ ᴍᴇᴅɪᴀ.
-
-sᴇᴛ ᴛʜᴜᴍʙɴᴀɪʟ
-
-➠ sᴇɴᴅ ᴀ ᴘʜᴏᴛᴏ ᴛᴏ ᴍᴀᴋᴇ ɪᴛ ᴀs ᴘᴇʀᴍᴀɴᴇɴᴛ ᴛʜᴜᴍʙɴᴀɪʟ.
-
-ᴅᴇʟᴇᴛɪɴɢ ᴛʜᴜᴍʙɴᴀɪʟ
-
-➠ sᴇɴᴅ /delthumb ᴛᴏ ᴅᴇʟᴇᴛᴇ ᴛʜᴜᴍʙɴᴀɪʟ.
-
-sᴇᴛᴛɪɴɢs
-
-➠ ᴄᴏɴғɪɢᴜʀᴇ ᴍʏ sᴇᴛᴛɪɴɢs ᴛᴏ ᴄʜᴀɴɢᴇ ᴜᴘʟᴏᴀᴅ ᴍᴏᴅᴇ
-
-sʜᴏᴡ ᴛʜᴜᴍʙɴᴀɪʟ
-
-➠ sᴇɴᴅ /showthumb ᴛᴏ ᴠɪᴇᴡ ᴄᴜsᴛᴏᴍ ᴛʜᴜᴍʙɴᴀɪʟ.
- 
-"""
     ABOUT_TEXT = """
 **Mʏ ɴᴀᴍᴇ** : [CloudPlus](https://t.me/CloudPlus_URLUploader_bot)
 
