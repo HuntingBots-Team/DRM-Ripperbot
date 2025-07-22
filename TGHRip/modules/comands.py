@@ -3,7 +3,7 @@ from pyrogram import Client, filters
 from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
-from TGHRip.modules import Translation
+from TGHRip.modules.pmtext import Translation
 from pyrogram import Client, filters 
 
 
