@@ -3,16 +3,14 @@ import os
 import subprocess
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
-from configparser import ConfigParser
 from TGHRip.inline_keyboard import send_task_options, handle_callback
 from TGHRip.access_control import is_authorized
+from config import Config
 
-config = ConfigParser()
-config.read("config.ini")
-
-TOKEN = config.get("TELEGRAM", "Token")
-OWNER_ID = int(config.get("TELEGRAM", "OwnerID"))
-AUTHORIZED_GROUP = int(config.get("TELEGRAM", "AuthorizedGroupID"))
+# Read config values from environment using Config class
+TOKEN = Config.BOT_TOKEN
+OWNER_ID = Config.OWNER_ID
+AUTHORIZED_GROUP = Config.LOG_CHANNEL
 
 logging.basicConfig(level=logging.INFO)
 
@@ -46,7 +44,7 @@ async def rip(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     url, key = context.args[0], context.args[1]
     filename = "output.mp4"
-    savepath = config.get("DOWNLOAD", "SavePath", fallback="downloads/")
+    savepath = Config.DOWNLOAD_LOCATION
     output_file = os.path.join(savepath, filename)
 
     # DASH (.mpd) links - use web-dl for DRM/non-DRM
