@@ -6,8 +6,8 @@ from pyrogram.types import (
 )
 from config import Config
 from pyrogram import Client, enums
-from utils.mongodb import db
-from utils.display_progress import humanbytes
+from TGHRip.utils.mongodb import db
+from TGHRip.utils.display_progress import humanbytes
 from pyrogram import Client
 
 @Client.on_message(filters.private & filters.command('total'))
