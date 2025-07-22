@@ -11,3 +11,8 @@ cachetools==6.1.0
 validators
 pwntools
 xmltodict==0.12.0
+psutil
+pymongo
+motor
+dnspython
+Pillow
