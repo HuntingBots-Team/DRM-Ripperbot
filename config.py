@@ -47,7 +47,7 @@ class Config(object):
     
     DEF_WATER_MARK_FILE = "CloudPlus_URLUploader_bot"
     
-    Sudo_Users = init(os.environ.get("Sudo_Users", ""))  
+    Sudo_Users = int(os.environ.get("Sudo_Users", ""))  
 
     Drive_ID = int(os.environ.get("Drive_ID", "1606221784"))
     
