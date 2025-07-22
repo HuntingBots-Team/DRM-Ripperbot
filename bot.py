@@ -4,8 +4,8 @@ import subprocess
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
 from configparser import ConfigParser
-from inline_keyboard import send_task_options, handle_callback
-from access_control import is_authorized
+from TGHRip.inline_keyboard import send_task_options, handle_callback
+from TGHRip.access_control import is_authorized
 
 config = ConfigParser()
 config.read("config.ini")
