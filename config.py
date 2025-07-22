@@ -2,6 +2,9 @@ import os
 
 import logging
 
+Credentials = auth/client_secrets.json
+TokenFile = auth/token.json
+
 logging.basicConfig(
     format='%(name)s - %(levelname)s - %(message)s',
     handlers=[logging.FileHandler('log.txt'),
@@ -44,11 +47,15 @@ class Config(object):
     
     DEF_WATER_MARK_FILE = "CloudPlus_URLUploader_bot"
     
-    DATABASE_URL = os.environ.get("DATABASE_URL", "mongodb+srv://hunter123:hunter123@cluster0.iueac.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+    Sudo_Users = init(os.environ.get("Sudo_Users", ""))  
+
+    Drive_ID = int(os.environ.get("Drive_ID", "1606221784"))
     
     SESSION_NAME = os.environ.get("SESSION_NAME", "AQA7eRMAdI8XLjuonz9nStZmtY1wJ05gCXoTGRTSe-S1pBCKayYbB8CtTZT1fhm9z0I0VU_YzFCJQbsUXUEudIA8MIwDFIUM9u68EP56oB7pvCLj1EV-4W9vKJR55ufa_qp4KqnCniV2mQ1vS98X9iwqe37j7IZ0F4K8fV2J8B-8VagJKKT_fOWyViJptWa3GFyem7X6qGXJ3KHdKCk_2RlMt48IEDwfRXeF8F1g5moxnsAlugP8SUvq7t7mVF5FcUFvWIqmGCBbPnsMKm-cCfyX6iNKPbtkpc23gmSKk8f0sLsT-y1zXQKKYMD0kElWxff3PaRnkLIQNL8QgdRNaJ32bch3yAAAAABNeVDBAA")
     
-    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002676062227"))
+    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002676062227"))  
+
+    OWNER_ID = int(os.environ.get("OWNER_ID", "1606221784"))
     
     LOGGER = logging
 
