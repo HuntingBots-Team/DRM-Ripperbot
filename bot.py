@@ -1,13 +1,11 @@
-import logging
 import os
 import subprocess
-import threading
-import asyncio
+import logging
 
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
 from pyrogram import Client
-from TGHRip.inline_keyboard import send_task_options, handle_callback
+from TGHRip.inline_keyboard import handle_callback
 from TGHRip.access_control import is_authorized
 from config import Config
 
@@ -15,6 +13,7 @@ from config import Config
 TOKEN = Config.BOT_TOKEN
 OWNER_ID = Config.OWNER_ID
 AUTHORIZED_GROUP = Config.LOG_CHANNEL
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -94,17 +93,18 @@ async def main():
     application.add_handler(CommandHandler("rip", rip))
     application.add_handler(CallbackQueryHandler(handle_callback))
 
-    if __name__ == "__main__" :
-    
-    if not os.path.isdir(Config.DOWNLOAD_LOCATION):
-        os.makedirs(Config.DOWNLOAD_LOCATION)
-    plugins = dict(root="TGHRip")
-    Client = Client("@urltofile00bot",
-    bot_token=Config.BOT_TOKEN,
-    api_id=Config.API_ID,
-    api_hash=Config.API_HASH,
-    upload_boost=True,
-    sleep_threshold=300,
-    plugins=plugins)
-    print("🎊 I AM ALIVE 🎊  • Support @TGHLeechSupport")
-    Client.run()
+    if __name__ == "__main__":
+        if not os.path.isdir(Config.DOWNLOAD_LOCATION):
+            os.makedirs(Config.DOWNLOAD_LOCATION)
+        plugins = dict(root="TGHRip")
+        client = Client(
+            "@urltofile00bot",
+            bot_token=Config.BOT_TOKEN,
+            api_id=Config.API_ID,
+            api_hash=Config.API_HASH,
+            upload_boost=True,
+            sleep_threshold=300,
+            plugins=plugins
+        )
+        print("🎊 I AM ALIVE 🎊  • Support @TGHLeechSupport")
+        client.run()
