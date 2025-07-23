@@ -98,6 +98,8 @@ async def main():
     await application.run_polling()
 
 def run_pyrogram():
+    # Set a new event loop for this thread (Python 3.10+ requirement)
+    asyncio.set_event_loop(asyncio.new_event_loop())
     # Initialize and run Pyrogram client in background thread
     pyro_client = Client(
         "@urltofile00bot",
