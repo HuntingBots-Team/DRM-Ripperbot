@@ -94,38 +94,17 @@ async def main():
     application.add_handler(CommandHandler("rip", rip))
     application.add_handler(CallbackQueryHandler(handle_callback))
 
-    # Start the bot (this is a blocking call)
-    await application.run_polling()
-
-def run_pyrogram():
-    # Set a new event loop for this thread (Python 3.10+ requirement)
-    asyncio.set_event_loop(asyncio.new_event_loop())
-    # Initialize and run Pyrogram client in background thread
-    pyro_client = Client(
-        "@urltofile00bot",
-        bot_token=Config.BOT_TOKEN,
-        api_id=Config.API_ID,
-        api_hash=Config.API_HASH,
-        sleep_threshold=300,
-        plugins=dict(root="TGHRip")
-    )
-    pyro_client.run()
-
-if __name__ == '__main__':
-    # Ensure download directory exists
+    if __name__ == "__main__" :
+    
     if not os.path.isdir(Config.DOWNLOAD_LOCATION):
         os.makedirs(Config.DOWNLOAD_LOCATION)
-
+    plugins = dict(root="TGHRip")
+    Client = Client("@urltofile00bot",
+    bot_token=Config.BOT_TOKEN,
+    api_id=Config.API_ID,
+    api_hash=Config.API_HASH,
+    upload_boost=True,
+    sleep_threshold=300,
+    plugins=plugins)
     print("🎊 I AM ALIVE 🎊  • Support @TGHLeechSupport")
-
-    # Run Pyrogram in a background thread
-    pyro_thread = threading.Thread(target=run_pyrogram, daemon=True)
-    pyro_thread.start()
-
-    # Safely get or create an asyncio loop and run main()
-    try:
-        loop = asyncio.get_running_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-    loop.run_until_complete(main())
+    Client.run()
