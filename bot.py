@@ -122,5 +122,10 @@ if __name__ == '__main__':
     pyro_thread = threading.Thread(target=run_pyrogram, daemon=True)
     pyro_thread.start()
 
-    # Run the Telegram bot in the main event loop
-    asyncio.run(main())
+    # Safely get or create an asyncio loop and run main()
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    loop.run_until_complete(main())
